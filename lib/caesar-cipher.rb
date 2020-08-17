@@ -27,36 +27,37 @@ Shift a string down any positions => done
 =end
 
 def caesar_cipher(str, key)
-    alphabet_lower = ("a".."z").to_a
-    alphabet_upper = ("A".."Z").to_a
+  alphabet_lower = ("a".."z").to_a
+  alphabet_upper = ("A".."Z").to_a
   
-    string_array = str.split(//)
-    shifted_array = []
+  string_array = str.split(//)
+  shifted_array = []
     
-    string_array.each do |char|
-      if alphabet_lower.include?(char)
-        char_index = alphabet_lower.index { |x| x == char }
-        new_index = char_index + key
-        if new_index > alphabet_lower.length - 1
-          new_index -= 26
-        end
-        shifted_array.push(alphabet_lower[new_index])
-      elsif alphabet_upper.include?(char)
-        char_index = alphabet_upper.index { |x| x == char }
-        new_index = char_index + key
-        if new_index > alphabet_upper.length - 1
-          new_index -= 26
-        end
-        shifted_array.push(alphabet_upper[new_index])
-      else
-        shifted_array.push(char)
+  string_array.each do |char|
+    if alphabet_lower.include?(char)
+      char_index = alphabet_lower.index { |x| x == char }
+      new_index = char_index + key
+      until new_index < alphabet_lower.length - 1
+        new_index -= 26
       end
+      shifted_array.push(alphabet_lower[new_index])
+    elsif alphabet_upper.include?(char)
+      char_index = alphabet_upper.index { |x| x == char }
+      new_index = char_index + key
+      until new_index < alphabet_upper.length - 1
+        new_index -= 26
+      end
+      shifted_array.push(alphabet_upper[new_index])
+    else
+      shifted_array.push(char)
     end
-    puts shifted_array.join('')
   end
-  
-  caesar_cipher("What a string!", 5)
-  caesar_cipher("Does it work in reverse?", -5)
-  caesar_cipher("D ocdif do yjzn!", 5)
+  shifted_array.join('')
+end
+
+
+# caesar_cipher("What a string!", 5)
+# caesar_cipher("Does it work in reverse?", -5)
+# caesar_cipher("D ocdif do yjzn!", 5)
   
   
